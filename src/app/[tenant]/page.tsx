@@ -1,8 +1,12 @@
+"use client";
 import "../globals.css";
 //components
 import SearchInput from "./components/SearchInput";
 
 export default function Home() {
+  function handleOnSearch(searchValue: string) {
+    console.log(searchValue);
+  }
   return (
     <div className="bg-pink-100">
       <header className="bg-#f9f9fb pt-11 pr-6 pl-6 pb-7">
@@ -23,9 +27,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         <div className="">
-          <SearchInput/>
+          <SearchInput mainColor={"#fb9400"} onSearch={handleOnSearch} />
         </div>
       </header>
     </div>
