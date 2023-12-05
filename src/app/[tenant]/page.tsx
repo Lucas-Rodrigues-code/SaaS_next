@@ -1,6 +1,7 @@
 "use client";
 import "../globals.css";
 //components
+import Banner from "./components/Banner";
 import SearchInput from "./components/SearchInput";
 
 export default function Home() {
@@ -8,7 +9,7 @@ export default function Home() {
     console.log(searchValue);
   }
   return (
-    <div className="bg-pink-100">
+    <div className="">
       <header className="bg-#f9f9fb pt-11 pr-6 pl-6 pb-7">
         <div className="flex justify-between justify-items-center">
           <div>
@@ -31,6 +32,8 @@ export default function Home() {
           <SearchInput mainColor={"#fb9400"} onSearch={handleOnSearch} />
         </div>
       </header>
+
+      <Banner />
     </div>
   );
 }
