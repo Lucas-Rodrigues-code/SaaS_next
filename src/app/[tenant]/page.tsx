@@ -2,6 +2,7 @@
 import "../globals.css";
 //components
 import Banner from "./components/Banner";
+import ProductItem from "./components/ProductItem";
 import SearchInput from "./components/SearchInput";
 
 export default function Home() {
@@ -34,6 +35,52 @@ export default function Home() {
       </header>
 
       <Banner />
+      <div className="grid grid-cols-2 gap-6 mx-6">
+        <ProductItem
+          data={{
+            id: 1,
+            image: "/assets/Imgs/burguer.png",
+            categoryName: "Tradicional",
+            name: "Texas Burguer",
+            price: "R$ 25,50",
+          }}
+          mainColor="#fb9400"
+          secondColor="#fb9400"
+        />
+        <ProductItem
+          data={{
+            id: 2,
+            image: "/assets/Imgs/burguer.png",
+            categoryName: "Tradicional",
+            name: "Texas Burguer",
+            price: "R$ 25,50",
+          }}
+          mainColor="#fb9400"
+          secondColor="#fb9400"
+        />
+        <ProductItem
+          data={{
+            id: 3,
+            image: "/assets/Imgs/burguer.png",
+            categoryName: "Tradicional",
+            name: "Texas Burguer",
+            price: "R$ 25,50",
+          }}
+          mainColor="#fb9400"
+          secondColor="#fb9400"
+        />
+        <ProductItem
+          data={{
+            id: 4,
+            image: "/assets/Imgs/burguer.png",
+            categoryName: "Tradicional",
+            name: "Texas Burguer",
+            price: "R$ 25,50",
+          }}
+          mainColor="#fb9400"
+          secondColor="#fb9400"
+        />
+      </div>
     </div>
   );
 }
