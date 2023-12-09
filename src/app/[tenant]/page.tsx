@@ -1,9 +1,9 @@
 "use client";
 import "../globals.css";
 //components
-import Banner from "./components/Banner";
-import ProductItem from "./components/ProductItem";
-import SearchInput from "./components/SearchInput";
+import Banner from "../components/Banner";
+import ProductItem from "../components/ProductItem";
+import SearchInput from "../components/SearchInput";
 
 export default function Home() {
   function handleOnSearch(searchValue: string) {
