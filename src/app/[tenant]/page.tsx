@@ -4,8 +4,26 @@ import "../globals.css";
 import Banner from "../components/Banner";
 import ProductItem from "../components/ProductItem";
 import SearchInput from "../components/SearchInput";
+//utils
+import { useApi } from "../libs/useApi";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
+type Props = {
+  params: {
+    tenant: string;
+  };
+};
+export default function Home({ params }: Props) {
+  const router = useRouter();
+
+  const api = useApi();
+
+  const tenant = /* await  */ api.getTenant(params.tenant);
+  console.log(tenant)
+  if (!tenant) {
+    router.push("/");
+  }
+
   function handleOnSearch(searchValue: string) {
     console.log(searchValue);
   }
@@ -84,3 +102,22 @@ export default function Home() {
     </div>
   );
 }
+
+/* export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { tenant: tenantSlug } = context.query;
+  const api = useApi();
+  const tenant =  await  api.getTenant(tenantSlug as string);
+  if (!tenant) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      tenant,
+    },
+  };
+}; */
