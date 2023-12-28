@@ -5,7 +5,7 @@ export type getTenantResponse = {
 
 }
 export function useApi() {
-    const getTenant = (tenantSlug: string): getTenantResponse | boolean => {
+    const getTenant = (tenantSlug: string): getTenantResponse | false => {
 
         switch (tenantSlug) {
             case "burguerX":

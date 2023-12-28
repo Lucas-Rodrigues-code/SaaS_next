@@ -29,7 +29,7 @@ export default function SearchInput({ mainColor, onSearch }: Props) {
         className="bg-white w-12 h-12 rounded-md flex justify-center items-center"
         onClick={() => onSearch(searchValue)}
       >
-        <CiSearch size={25} color="#EAB30A" />
+        <CiSearch size={25} color={mainColor}/>
       </div>
       <input
         className="border-0 outline-none w-full flex-1 h-12 font-normal text-base ml-3 rounded-md "

@@ -5,7 +5,7 @@ import Banner from "../components/Banner";
 import ProductItem from "../components/ProductItem";
 import SearchInput from "../components/SearchInput";
 //utils
-import { useApi } from "../libs/useApi";
+import { getTenantResponse, useApi } from "../libs/useApi";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -18,12 +18,17 @@ export default function Home({ params }: Props) {
 
   const api = useApi();
 
-  const tenant = /* await  */ api.getTenant(params.tenant);
-  console.log(tenant)
-  if (!tenant) {
-    router.push("/");
-  }
+  const tenant= /* await  */ api.getTenant(
+    params.tenant
+  );
+  
+  
 
+  if (tenant === false) {
+    router.push("/");
+    return
+  }
+ 
   function handleOnSearch(searchValue: string) {
     console.log(searchValue);
   }
@@ -41,14 +46,14 @@ export default function Home({ params }: Props) {
           </div>
           <div>
             <div className="w-5 h-4 flex flex-col justify-between">
-              <div className="h-0.5 bg-yellow-500"></div>
-              <div className="h-0.5 bg-yellow-500"></div>
-              <div className="h-0.5 bg-yellow-500"></div>
+              <div className="h-0.5 bg-yellow-500" style={{background:tenant.secondColor}}></div>
+              <div className="h-0.5 bg-yellow-500" style={{background:tenant.secondColor}}></div>
+              <div className="h-0.5 bg-yellow-500" style={{background:tenant.secondColor}}></div>
             </div>
           </div>
         </div>
         <div className="">
-          <SearchInput mainColor={"#fb9400"} onSearch={handleOnSearch} />
+          <SearchInput mainColor={tenant.mainColor} onSearch={handleOnSearch} />
         </div>
       </header>
 
@@ -62,8 +67,8 @@ export default function Home({ params }: Props) {
             name: "Texas Burguer",
             price: "R$ 25,50",
           }}
-          mainColor="#fb9400"
-          secondColor="#fb9400"
+          mainColor={tenant.mainColor}
+          secondColor={tenant.secondColor}
         />
         <ProductItem
           data={{
@@ -73,8 +78,8 @@ export default function Home({ params }: Props) {
             name: "Texas Burguer",
             price: "R$ 25,50",
           }}
-          mainColor="#fb9400"
-          secondColor="#fb9400"
+          mainColor={tenant.mainColor}
+          secondColor={tenant.secondColor}
         />
         <ProductItem
           data={{
@@ -84,8 +89,8 @@ export default function Home({ params }: Props) {
             name: "Texas Burguer",
             price: "R$ 25,50",
           }}
-          mainColor="#fb9400"
-          secondColor="#fb9400"
+          mainColor={tenant.mainColor}
+          secondColor={tenant.secondColor}
         />
         <ProductItem
           data={{
@@ -95,8 +100,8 @@ export default function Home({ params }: Props) {
             name: "Texas Burguer",
             price: "R$ 25,50",
           }}
-          mainColor="#fb9400"
-          secondColor="#fb9400"
+          mainColor={tenant.mainColor}
+          secondColor={tenant.secondColor}
         />
       </div>
     </div>
