@@ -7,6 +7,8 @@ import SearchInput from "../components/SearchInput";
 //utils
 import { getTenantResponse, useApi } from "../libs/useApi";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "../contexts/AppContexts";
+import { useEffect } from "react";
 
 type Props = {
   params: {
@@ -18,20 +20,23 @@ export default function Home({ params }: Props) {
 
   const api = useApi();
 
-  const tenant= /* await  */ api.getTenant(
-    params.tenant
-  );
-  
-  
+  const tenant = /* await  */ api.getTenant(params.tenant);
 
   if (tenant === false) {
     router.push("/");
-    return
+    return;
   }
- 
+
+  const { tenant: tenantContext, setTenant } = useAppContext();
+
+  useEffect(() => {
+    setTenant(tenant);
+  }, []);
+
   function handleOnSearch(searchValue: string) {
     console.log(searchValue);
   }
+  console.log(tenantContext, "tenantContext");
   return (
     <div className="">
       <header className="bg-#f9f9fb pt-11 pr-6 pl-6 pb-7">
@@ -46,14 +51,23 @@ export default function Home({ params }: Props) {
           </div>
           <div>
             <div className="w-5 h-4 flex flex-col justify-between">
-              <div className="h-0.5 bg-yellow-500" style={{background:tenant.secondColor}}></div>
-              <div className="h-0.5 bg-yellow-500" style={{background:tenant.secondColor}}></div>
-              <div className="h-0.5 bg-yellow-500" style={{background:tenant.secondColor}}></div>
+              <div
+                className="h-0.5 bg-yellow-500"
+                style={{ background: tenantContext?.secondColor }}
+              ></div>
+              <div
+                className="h-0.5 bg-yellow-500"
+                style={{ background: tenantContext?.secondColor }}
+              ></div>
+              <div
+                className="h-0.5 bg-yellow-500"
+                style={{ background: tenantContext?.secondColor }}
+              ></div>
             </div>
           </div>
         </div>
         <div className="">
-          <SearchInput mainColor={tenant.mainColor} onSearch={handleOnSearch} />
+          <SearchInput onSearch={handleOnSearch} />
         </div>
       </header>
 
@@ -67,8 +81,6 @@ export default function Home({ params }: Props) {
             name: "Texas Burguer",
             price: "R$ 25,50",
           }}
-          mainColor={tenant.mainColor}
-          secondColor={tenant.secondColor}
         />
         <ProductItem
           data={{
@@ -78,8 +90,6 @@ export default function Home({ params }: Props) {
             name: "Texas Burguer",
             price: "R$ 25,50",
           }}
-          mainColor={tenant.mainColor}
-          secondColor={tenant.secondColor}
         />
         <ProductItem
           data={{
@@ -89,8 +99,6 @@ export default function Home({ params }: Props) {
             name: "Texas Burguer",
             price: "R$ 25,50",
           }}
-          mainColor={tenant.mainColor}
-          secondColor={tenant.secondColor}
         />
         <ProductItem
           data={{
@@ -100,8 +108,6 @@ export default function Home({ params }: Props) {
             name: "Texas Burguer",
             price: "R$ 25,50",
           }}
-          mainColor={tenant.mainColor}
-          secondColor={tenant.secondColor}
         />
       </div>
     </div>
