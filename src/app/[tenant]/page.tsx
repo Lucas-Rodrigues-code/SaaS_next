@@ -36,7 +36,7 @@ export default function Home({ params }: Props) {
   function handleOnSearch(searchValue: string) {
     console.log(searchValue);
   }
-  console.log(tenantContext, "tenantContext");
+
   return (
     <div className="">
       <header className="bg-#f9f9fb pt-11 pr-6 pl-6 pb-7">
