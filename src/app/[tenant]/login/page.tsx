@@ -6,9 +6,10 @@
 import { getTenantResponse, useApi } from "../../libs/useApi";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "../../contexts/AppContexts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Header from "@/app/components/Header";
+import InputField from "@/app/components/InputField";
 
 type Props = {
   params: {
@@ -36,7 +37,10 @@ export default function Login({ params }: Props) {
   function handleOnSearch(searchValue: string) {
     console.log(searchValue);
   }
-  console.log(tenantContext, "tenantContext");
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   if (!tenantContext) {
     return <div>...</div>;
   }
@@ -48,6 +52,19 @@ export default function Login({ params }: Props) {
       <Header
         color={tenantContext?.mainColor}
         backHref={`/${tenantContext?.slug}`}
+      />
+      <InputField
+        color={tenantContext.mainColor}
+        placeHolder="Digite seu e-mail"
+        value={email}
+        onChange={setEmail}
+      />
+      <InputField
+        color={tenantContext.mainColor}
+        placeHolder="Digite sua senha"
+        value={password}
+        onChange={setPassword}
+        password
       />
     </div>
   );
