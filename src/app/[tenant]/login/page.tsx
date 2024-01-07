@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import Header from "@/app/components/Header";
 import InputField from "@/app/components/InputField";
+import { Button } from "@/app/components/Button";
 
 type Props = {
   params: {
@@ -41,11 +42,13 @@ export default function Login({ params }: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  function handleSubmit() {}
+
   if (!tenantContext) {
     return <div>...</div>;
   }
   return (
-    <div className="bg-#fff pt-12">
+    <div className="bg-#fff pt-12" style={{padding:"50px 24px"}}>
       <Head>
         <title>Login | {tenantContext?.name}</title>
       </Head>
@@ -65,6 +68,18 @@ export default function Login({ params }: Props) {
         value={password}
         onChange={setPassword}
         password
+      />
+      <Button
+        color={tenantContext.mainColor}
+        label="Entrar"
+        onClick={handleSubmit}
+        fill
+      />
+       <Button
+        color={tenantContext.mainColor}
+        label="Entrar"
+        onClick={handleSubmit}
+       
       />
     </div>
   );
