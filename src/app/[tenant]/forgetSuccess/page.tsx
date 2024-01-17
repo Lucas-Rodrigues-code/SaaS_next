@@ -11,13 +11,14 @@ import Head from "next/head";
 import Header from "@/app/components/Header";
 import InputField from "@/app/components/InputField";
 import { Button } from "@/app/components/Button";
+import { RiMailSendFill } from "react-icons/ri";
 
 type Props = {
   params: {
     tenant: string;
   };
 };
-export default function ForgetPassword({ params }: Props) {
+export default function ForgetSuccess({ params }: Props) {
   const router = useRouter();
 
   const api = useApi();
@@ -35,14 +36,8 @@ export default function ForgetPassword({ params }: Props) {
     setTenant(tenant);
   }, []);
 
-  function handleOnSearch(searchValue: string) {
-    console.log(searchValue);
-  }
-
-  const [email, setEmail] = useState("");
-
   function handleSubmit() {
-    router.push(`/${tenantContext?.slug}/forget-success`);
+    router.push(`/${tenantContext?.slug}/login`);
   }
 
   if (!tenantContext) {
@@ -55,46 +50,33 @@ export default function ForgetPassword({ params }: Props) {
       </Head>
       <Header
         color={tenantContext?.mainColor}
-        backHref={`/${tenantContext?.slug}/login`}
+        backHref={`/${tenantContext?.slug}/forget`}
       />
-
-      <div className="font-bold text-3xl mt-5 mb-10 text-center">
-        {tenantContext.name}
+      <div
+        className="flex justify-center"
+        style={{ margin: "100px auto 53px auto" }}
+      >
+        <RiMailSendFill size={90} color={tenantContext.mainColor} />
       </div>
       <div className="font-semibold text-2xl text-center mb-8">
-        Esqueceu sua senha ?
+        Verifique seu e-mail
       </div>
       <div
         className="font-normal text-lg leading-5 text-center pb-10"
         style={{
           color: "rgba(27,27,27,0.8)",
           margin: "auto",
-          width: "90%",
-          borderBottom: "1.5px solid #000",
-          position: "relative",
-          borderBottomColor: tenantContext.mainColor,
+          width: "100%",
         }}
       >
-        Preencha o campo com seu e-mail e receba as instruções necessárias para
-        redefinir a sua senha.
+        Enviamos as instruções para recuperação de senha para seu e-mail.
       </div>
-      <div
-        style={{ borderTop: "1.5px solid #e2e2e2", marginTop: "-1.5px " }}
-      ></div>
-      <div className="mt-14">
-        <div className="mt-8">
-          <InputField
-            color={tenantContext.mainColor}
-            placeHolder="Digite seu e-mail"
-            value={email}
-            onChange={setEmail}
-          />
-        </div>
 
+      <div className="mt-14">
         <div className="mt-8 mb-8">
           <Button
             color={tenantContext.mainColor}
-            label="Enviar"
+            label="Fazer login"
             onClick={handleSubmit}
             fill
           />

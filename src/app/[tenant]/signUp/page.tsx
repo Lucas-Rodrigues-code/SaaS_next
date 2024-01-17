@@ -18,7 +18,7 @@ type Props = {
     tenant: string;
   };
 };
-export default function Login({ params }: Props) {
+export default function SignUp({ params }: Props) {
   const router = useRouter();
 
   const api = useApi();
