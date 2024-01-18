@@ -8,7 +8,8 @@ import SearchInput from "../components/SearchInput";
 import { getTenantResponse, useApi } from "../libs/useApi";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "../contexts/AppContexts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Product } from "../types/Product";
 
 type Props = {
   params: {
@@ -18,9 +19,11 @@ type Props = {
 export default function Home({ params }: Props) {
   const router = useRouter();
 
-  const api = useApi();
+  const api = useApi(params.tenant as string);
 
-  const tenant = /* await  */ api.getTenant(params.tenant);
+  const tenant = api.getTenant();
+
+  const [products, setProducts] = useState<Product[]>(api.getAllProducts());
 
   if (tenant === false) {
     router.push("/");
@@ -73,42 +76,9 @@ export default function Home({ params }: Props) {
 
       <Banner />
       <div className="grid grid-cols-2 gap-6 mx-6">
-        <ProductItem
-          data={{
-            id: 1,
-            image: "/assets/Imgs/burguer.png",
-            categoryName: "Tradicional",
-            name: "Texas Burguer",
-            price: "R$ 25,50",
-          }}
-        />
-        <ProductItem
-          data={{
-            id: 2,
-            image: "/assets/Imgs/burguer.png",
-            categoryName: "Tradicional",
-            name: "Texas Burguer",
-            price: "R$ 25,50",
-          }}
-        />
-        <ProductItem
-          data={{
-            id: 3,
-            image: "/assets/Imgs/burguer.png",
-            categoryName: "Tradicional",
-            name: "Texas Burguer",
-            price: "R$ 25,50",
-          }}
-        />
-        <ProductItem
-          data={{
-            id: 4,
-            image: "/assets/Imgs/burguer.png",
-            categoryName: "Tradicional",
-            name: "Texas Burguer",
-            price: "R$ 25,50",
-          }}
-        />
+        {products.map((product, index) => {
+          return <ProductItem key={index} data={product} />;
+        })}
       </div>
     </div>
   );

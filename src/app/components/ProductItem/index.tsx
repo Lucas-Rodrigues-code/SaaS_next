@@ -4,12 +4,14 @@
 import Link from "next/link";
 import { Product } from "../../types/Product";
 import { useAppContext } from "@/app/contexts/AppContexts";
+import { useFormatter } from "@/app/libs/useFormatter";
 
 type Props = {
   data: Product;
 };
 export default function ProductItem({ data }: Props) {
   const { tenant, setTenant } = useAppContext();
+  const formatter = useFormatter();
   return (
     <Link href={`/${tenant?.slug}/product/${data.id}`}>
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -28,7 +30,7 @@ export default function ProductItem({ data }: Props) {
             className="font-semibold text-base"
             style={{ color: tenant?.mainColor }}
           >
-            R$ 25,50
+            {formatter.formatPrice(data.price)}
           </div>
         </div>
       </div>
